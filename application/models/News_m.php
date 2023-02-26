@@ -13,6 +13,17 @@ class News_m extends CI_Model {
 		return $query->result_array();
     }
 
+	public function getFokus($start = null, $limit = null)
+	{
+		$this->db->select('*');
+        $this->db->from('tb_fokus');
+        $this->db->where('status','aktif');
+        $this->db->order_by('created','DESC');
+		$this->db->limit($limit, $start);
+		$query = $this->db->get();
+		return $query->result_array();
+    }
+
 	public function getBy($kolom = null, $value = null, $start = null, $limit = null)
 	{
 		$this->db->select('news_subtitle,focnews_id,news_wm,news_id,catnews_id,news_title,news_headline,news_title,news_caption,news_description, news_content,news_image_new,news_writer,tags_id,news_datepub,news_view');
